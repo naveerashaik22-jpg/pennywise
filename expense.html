@@ -1,0 +1,1451 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PennyWise | Personal Finance</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
+
+:root {
+    --green: #174b3a;
+    --green2: #23694f;
+    --mint: #dff2e7;
+    --bg: #f7f8f4;
+    --white: #ffffff;
+    --text: #26382f;
+    --muted: #89958e;
+    --border: #e9eee9;
+    --red: #d96a6a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'DM Sans', Arial, sans-serif;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+button, input, select {
+    font: inherit;
+}
+
+/* LOGIN */
+
+#loginPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    background: #f4f7f2;
+}
+
+.login-layout {
+    width: 900px;
+    max-width: 100%;
+    min-height: 540px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: white;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 15px 50px #174b3a12;
+}
+
+.login-left {
+    background: var(--green);
+    color: white;
+    padding: 50px 38px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    font-size: 23px;
+}
+
+.brand-icon {
+    background: #dff2e7;
+    color: var(--green);
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    font-size: 23px;
+}
+
+.login-left h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 38px;
+    line-height: 1.3;
+    margin: 45px 0 15px;
+}
+
+.login-left p {
+    color: #c4d9cc;
+    line-height: 1.8;
+}
+
+.login-quote {
+    color: #dff2e7;
+    font-size: 14px;
+}
+
+.login-right {
+    padding: 55px 42px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-right h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.login-sub {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.login-right input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    outline: none;
+}
+
+.login-right input:focus {
+    border-color: var(--green2);
+}
+
+.primary-btn {
+    background: var(--green);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.primary-btn:hover {
+    background: var(--green2);
+    transform: translateY(-1px);
+}
+
+.switch {
+    text-align: center;
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.switch span {
+    color: var(--green2);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.error {
+    color: #d9534f;
+    text-align: center;
+    font-size: 13px;
+    margin-top: 12px;
+}
+
+/* APPLICATION */
+
+#app {
+    display: none;
+    min-height: 100vh;
+}
+
+.sidebar {
+    width: 245px;
+    background: white;
+    position: fixed;
+    height: 100vh;
+    padding: 28px 19px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin: 0 8px 45px;
+}
+
+.logo-icon {
+    width: 39px;
+    height: 39px;
+    background: var(--green);
+    color: white;
+    border-radius: 11px;
+    display: grid;
+    place-items: center;
+    font-size: 21px;
+}
+
+.logo h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 21px;
+    color: var(--green);
+}
+
+.nav-label {
+    color: #a1aaa4;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin: 0 12px 13px;
+}
+
+.nav-btn {
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    padding: 13px 14px;
+    border-radius: 9px;
+    margin-bottom: 7px;
+    color: #78847c;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+    background: var(--mint);
+    color: var(--green);
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+}
+
+.logout {
+    color: #d36c6c;
+}
+
+/* MAIN */
+
+.main {
+    margin-left: 245px;
+    padding: 34px 42px;
+    max-width: 1600px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    gap: 15px;
+}
+
+.topbar h1 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 26px;
+}
+
+.topbar p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 9px 15px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--mint);
+    color: var(--green);
+    font-weight: 800;
+}
+
+.profile-name {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* DASHBOARD */
+
+.welcome {
+    margin-bottom: 24px;
+}
+
+.welcome h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 21px;
+}
+
+.welcome p {
+    color: var(--muted);
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 19px;
+    margin-bottom: 27px;
+}
+
+.card {
+    padding: 24px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px #193e2805;
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.card-top p {
+    color: #77837b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.card-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    font-size: 19px;
+    background: var(--mint);
+}
+
+.card h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 27px;
+    color: var(--green);
+}
+
+.card small {
+    display: block;
+    margin-top: 7px;
+    color: #9ba49d;
+}
+
+/* PANELS */
+
+.panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    gap: 12px;
+}
+
+.panel-heading h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+}
+
+.panel-heading p {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.field label {
+    font-size: 12px;
+    color: #77837b;
+    font-weight: 700;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #fcfdfb;
+    color: var(--text);
+    outline: none;
+}
+
+input:focus, select:focus {
+    border-color: var(--green2);
+}
+
+form button {
+    grid-column: span 2;
+    margin-top: 5px;
+}
+
+/* TRANSACTIONS */
+
+.search-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.search-row input {
+    flex: 2;
+}
+
+.search-row select {
+    flex: 1;
+    max-width: 210px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 650px;
+}
+
+th {
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: .7px;
+    color: #89958e;
+    background: #f7f9f6;
+    padding: 14px 12px;
+}
+
+td {
+    padding: 16px 12px;
+    border-bottom: 1px solid #f0f2ef;
+    font-size: 13px;
+}
+
+.income {
+    color: #24875c;
+    font-weight: 700;
+}
+
+.expense {
+    color: #d96a6a;
+    font-weight: 700;
+}
+
+.delete {
+    background: #fff0ef;
+    color: #d96a6a;
+    border: none;
+    padding: 8px 11px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.delete:hover {
+    background: #ffe0dd;
+}
+
+.empty {
+    text-align: center;
+    color: #9ba49d;
+    padding: 28px;
+    font-size: 13px;
+}
+
+/* ABOUT */
+
+#aboutPage {
+    display: none;
+}
+
+.about-hero {
+    background: var(--green);
+    padding: 42px;
+    border-radius: 17px;
+    color: white;
+    margin-bottom: 25px;
+}
+
+.about-hero h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 29px;
+    margin-bottom: 12px;
+}
+
+.about-hero p {
+    color: #d0e4d8;
+    line-height: 1.8;
+    max-width: 650px;
+}
+
+.about-card {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.about-card h2 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 19px;
+    margin-bottom: 14px;
+}
+
+.about-card p {
+    color: #77837b;
+    font-size: 14px;
+    line-height: 1.9;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 13px;
+}
+
+.feature {
+    background: #f6f9f5;
+    padding: 18px;
+    border-radius: 10px;
+}
+
+.feature h3 {
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.feature p {
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #a0aaa3;
+    font-size: 12px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 900px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 14px;
+    }
+
+    .logo {
+        margin: 0 8px 15px;
+    }
+
+    .nav-label {
+        display: none;
+    }
+
+    .sidebar button {
+        display: inline-block;
+        width: auto;
+        margin: 2px;
+        padding: 10px;
+    }
+
+    .sidebar-bottom {
+        display: inline-block;
+        margin-top: 5px;
+        border: none;
+        padding: 0;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 22px;
+    }
+}
+
+@media(max-width: 600px) {
+    .login-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .login-left {
+        padding: 25px;
+    }
+
+    .login-left h1 {
+        font-size: 27px;
+        margin: 25px 0 10px;
+    }
+
+    .login-quote {
+        margin-top: 20px;
+    }
+
+    .login-right {
+        padding: 30px 24px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    form {
+        grid-template-columns: 1fr;
+    }
+
+    form button {
+        grid-column: span 1;
+    }
+
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .search-row {
+        flex-direction: column;
+    }
+
+    .search-row select {
+        max-width: 100%;
+    }
+
+    .about-hero {
+        padding: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN PAGE -->
+
+<div id="loginPage">
+
+    <div class="login-layout">
+
+        <div class="login-left">
+
+            <div class="brand">
+                <div class="brand-icon">₹</div>
+                PennyWise
+            </div>
+
+            <div>
+                <h1>Take control of your money.</h1>
+                <p>
+                    Track your spending, manage your income
+                    and build smarter financial habits.
+                    Your money deserves a better plan.
+                </p>
+            </div>
+
+            <div class="login-quote">
+                Spend consciously. Save confidently.
+            </div>
+
+        </div>
+
+        <div class="login-right">
+
+            <div id="loginForm">
+
+                <h2>Welcome back!</h2>
+                <p class="login-sub">Sign in to your PennyWise account.</p>
+
+                <input type="text" id="loginUser"
+                    placeholder="Username">
+
+                <input type="password" id="loginPass"
+                    placeholder="Password">
+
+                <button class="primary-btn" style="width:100%"
+                    onclick="login()">Sign In →</button>
+
+                <div class="switch">
+                    New to PennyWise?
+                    <span onclick="showRegister()">Create an account</span>
+                </div>
+
+            </div>
+
+            <div id="registerForm" style="display:none">
+
+                <h2>Create account</h2>
+                <p class="login-sub">Start your financial journey with us.</p>
+
+                <input type="text" id="regUser"
+                    placeholder="Choose username">
+
+                <input type="password" id="regPass"
+                    placeholder="Create password">
+
+                <button class="primary-btn" style="width:100%"
+                    onclick="register()">Create Account →</button>
+
+                <div class="switch">
+                    Already have an account?
+                    <span onclick="showLogin()">Sign in</span>
+                </div>
+
+            </div>
+
+            <p class="error" id="message"></p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- MAIN APPLICATION -->
+
+<div id="app">
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <div class="logo-icon">₹</div>
+            <h2>PennyWise</h2>
+        </div>
+
+        <p class="nav-label">MENU</p>
+
+        <button class="nav-btn active" id="dashBtn"
+            onclick="showDashboard()">◫ &nbsp; Dashboard</button>
+
+        <button class="nav-btn" id="aboutBtn"
+            onclick="showAbout()">ⓘ &nbsp; About</button>
+
+        <div class="sidebar-bottom">
+            <button class="nav-btn logout"
+                onclick="logout()">↪ &nbsp; Logout</button>
+        </div>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div>
+                <h1 id="pageTitle">Dashboard</h1>
+                <p>Your personal finance overview</p>
+            </div>
+
+            <div class="profile">
+                <div class="avatar" id="avatar">U</div>
+                <span class="profile-name" id="username"></span>
+            </div>
+
+        </div>
+
+
+        <!-- DASHBOARD -->
+
+        <div id="dashboardPage">
+
+            <div class="welcome">
+                <h2 id="welcomeText">Welcome back!</h2>
+                <p>Here's what's happening with your money today.</p>
+            </div>
+
+            <div class="cards">
+
+                <div class="card">
+                    <div class="card-top">
+                        <p>Total Income</p>
+                        <div class="card-icon">↗</div>
+                    </div>
+                    <h2 id="income">₹0.00</h2>
+                    <small>Your total earnings</small>
+                </div>
+
+                <div class="card">
+                    <div class="card-top">
+                        <p>Total Expenses</p>
+                        <div class="card-icon">↘</div>
+                    </div>
+                    <h2 id="expense">₹0.00</h2>
+                    <small>Your total spending</small>
+                </div>
+
+                <div class="card">
+                    <div class="card-top">
+                        <p>Available Balance</p>
+                        <div class="card-icon">₹</div>
+                    </div>
+                    <h2 id="balance">₹0.00</h2>
+                    <small>Your remaining amount</small>
+                </div>
+
+            </div>
+
+
+            <section class="panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <h2>Add Transaction</h2>
+                        <p>Record your income or expenses.</p>
+                    </div>
+                </div>
+
+                <form id="transactionForm">
+
+                    <div class="field">
+                        <label>Description</label>
+                        <input type="text" id="description"
+                            placeholder="e.g. Grocery shopping" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Amount (₹)</label>
+                        <input type="number" id="amount"
+                            placeholder="Enter amount" min="0.01"
+                            step="0.01" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Transaction Type</label>
+                        <select id="type">
+                            <option value="expense">Expense</option>
+                            <option value="income">Income</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Category</label>
+                        <select id="category">
+                            <option>Food</option>
+                            <option>Travel</option>
+                            <option>Shopping</option>
+                            <option>Bills</option>
+                            <option>Education</option>
+                            <option>Salary</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Date</label>
+                        <input type="date" id="date" required>
+                    </div>
+
+                    <button class="primary-btn" type="submit">
+                        + Add Transaction
+                    </button>
+
+                </form>
+
+            </section>
+
+
+            <section class="panel">
+
+                <div class="panel-heading">
+                    <div>
+                        <h2>Recent Transactions</h2>
+                        <p>Keep track of where your money goes.</p>
+                    </div>
+                </div>
+
+                <div class="search-row">
+
+                    <input type="text" id="search"
+                        placeholder="Search transactions...">
+
+                    <select id="filter">
+                        <option value="All">All Categories</option>
+                        <option>Food</option>
+                        <option>Travel</option>
+                        <option>Shopping</option>
+                        <option>Bills</option>
+                        <option>Education</option>
+                        <option>Salary</option>
+                        <option>Other</option>
+                    </select>
+
+                </div>
+
+                <div class="table-container">
+
+                    <table>
+
+                        <thead>
+                            <tr>
+                                <th>DESCRIPTION</th>
+                                <th>CATEGORY</th>
+                                <th>DATE</th>
+                                <th>TYPE</th>
+                                <th>AMOUNT</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="transactionList"></tbody>
+
+                    </table>
+
+                </div>
+
+                <p class="empty" id="empty">
+                    No transactions found. Add your first transaction!
+                </p>
+
+            </section>
+
+        </div>
+
+
+        <!-- ABOUT PAGE -->
+
+        <div id="aboutPage">
+
+            <div class="about-hero">
+                <h2>Money management, made simpler.</h2>
+                <p>
+                    PennyWise is a personal finance management
+                    application designed to make tracking money
+                    simple, organized and accessible. Take charge
+                    of your finances, one transaction at a time.
+                </p>
+            </div>
+
+            <div class="about-card">
+
+                <h2>About PennyWise</h2>
+
+                <p>
+                    PennyWise helps individuals monitor their
+                    income and expenses through an easy-to-use
+                    dashboard. Users can record transactions,
+                    organize spending into categories and view
+                    their overall financial balance.
+                </p>
+
+            </div>
+
+            <div class="about-card">
+
+                <h2>Our Mission</h2>
+
+                <p>
+                    To encourage smarter financial habits by
+                    providing a simple platform for tracking
+                    everyday money activities and understanding
+                    personal spending patterns.
+                </p>
+
+            </div>
+
+            <div class="about-card">
+
+                <h2>What You Can Do</h2>
+
+                <div class="features">
+
+                    <div class="feature">
+                        <h3>🔐 Personal Accounts</h3>
+                        <p>Create an account and access your own dashboard.</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>📊 Financial Overview</h3>
+                        <p>Monitor total income, expenses and available balance.</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>📝 Transaction Management</h3>
+                        <p>Add, view and delete your transactions.</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>🔍 Smart Search</h3>
+                        <p>Search and filter transactions by category.</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>💾 Local Storage</h3>
+                        <p>Keep your information saved in your browser.</p>
+                    </div>
+
+                    <div class="feature">
+                        <h3>📱 Responsive Interface</h3>
+                        <p>Use PennyWise across desktop and mobile screens.</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="about-card">
+
+                <h2>Technology Stack</h2>
+
+                <p>
+                    <b>HTML5:</b> Application structure and forms.<br>
+                    <b>CSS3:</b> Modern styling and responsive design.<br>
+                    <b>JavaScript:</b> Application logic and calculations.<br>
+                    <b>Local Storage:</b> Browser-based data persistence.
+                </p>
+
+            </div>
+
+        </div>
+
+        <footer>
+            © 2026 PennyWise. Spend consciously. Save confidently.
+        </footer>
+
+    </main>
+
+</div>
+
+
+<script>
+
+// ACCOUNT MANAGEMENT
+
+function getUsers() {
+    return JSON.parse(localStorage.getItem("users")) || {};
+}
+
+function showRegister() {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("registerForm").style.display = "block";
+    document.getElementById("message").textContent = "";
+}
+
+function showLogin() {
+    document.getElementById("registerForm").style.display = "none";
+    document.getElementById("loginForm").style.display = "block";
+    document.getElementById("message").textContent = "";
+}
+
+// REGISTER
+
+function register() {
+
+    let user = document.getElementById("regUser").value.trim();
+    let pass = document.getElementById("regPass").value;
+
+    let users = getUsers();
+
+    if (!user || !pass) {
+        alert("Please fill all fields!");
+        return;
+    }
+
+    if (users[user]) {
+        alert("Username already exists!");
+        return;
+    }
+
+    if (pass.length < 4) {
+        alert("Password must contain at least 4 characters!");
+        return;
+    }
+
+    users[user] = pass;
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Account created successfully!");
+
+    document.getElementById("regUser").value = "";
+    document.getElementById("regPass").value = "";
+
+    showLogin();
+}
+
+// LOGIN
+
+let currentUser = "";
+let transactions = [];
+
+function login() {
+
+    let user = document.getElementById("loginUser").value.trim();
+    let pass = document.getElementById("loginPass").value;
+
+    let users = getUsers();
+
+    if (users[user] && users[user] === pass) {
+
+        currentUser = user;
+
+        localStorage.setItem("activeUser", user);
+
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("app").style.display = "block";
+
+        document.getElementById("username").textContent = user;
+        document.getElementById("avatar").textContent =
+            user.charAt(0).toUpperCase();
+
+        document.getElementById("welcomeText").textContent =
+            "Welcome back, " + user + "!";
+
+        document.getElementById("loginPass").value = "";
+
+        showDashboard();
+
+    } else {
+
+        document.getElementById("message").textContent =
+            "Invalid username or password!";
+
+    }
+}
+
+// LOGOUT
+
+function logout() {
+
+    localStorage.removeItem("activeUser");
+
+    currentUser = "";
+    transactions = [];
+
+    document.getElementById("app").style.display = "none";
+    document.getElementById("loginPage").style.display = "flex";
+
+    document.getElementById("loginUser").value = "";
+    document.getElementById("loginPass").value = "";
+
+    showLogin();
+}
+
+// USER DATA STORAGE
+
+function storageKey() {
+    return "transactions_" + currentUser;
+}
+
+function loadData() {
+
+    transactions = JSON.parse(
+        localStorage.getItem(storageKey())
+    ) || [];
+
+}
+
+function saveData() {
+
+    localStorage.setItem(
+        storageKey(),
+        JSON.stringify(transactions)
+    );
+
+}
+
+// NAVIGATION
+
+function showDashboard() {
+
+    document.getElementById("dashboardPage").style.display = "block";
+    document.getElementById("aboutPage").style.display = "none";
+
+    document.getElementById("pageTitle").textContent = "Dashboard";
+
+    document.getElementById("dashBtn").classList.add("active");
+    document.getElementById("aboutBtn").classList.remove("active");
+
+    loadData();
+    display();
+    calculate();
+
+}
+
+function showAbout() {
+
+    document.getElementById("dashboardPage").style.display = "none";
+    document.getElementById("aboutPage").style.display = "block";
+
+    document.getElementById("pageTitle").textContent = "About PennyWise";
+
+    document.getElementById("dashBtn").classList.remove("active");
+    document.getElementById("aboutBtn").classList.add("active");
+
+}
+
+// DEFAULT DATE
+
+document.getElementById("date").value =
+    new Date().toISOString().split("T")[0];
+
+// ADD TRANSACTION
+
+document.getElementById("transactionForm")
+.addEventListener("submit", function(e) {
+
+    e.preventDefault();
+
+    let description =
+        document.getElementById("description").value.trim();
+
+    let amount =
+        Number(document.getElementById("amount").value);
+
+    let type =
+        document.getElementById("type").value;
+
+    let category =
+        document.getElementById("category").value;
+
+    let date =
+        document.getElementById("date").value;
+
+    if (!description || !date ||
+        !Number.isFinite(amount) || amount <= 0) {
+
+        alert("Enter valid transaction details!");
+        return;
+
+    }
+
+    let transaction = {
+        id: Date.now(),
+        description,
+        amount,
+        type,
+        category,
+        date
+    };
+
+    transactions.push(transaction);
+
+    saveData();
+    display();
+    calculate();
+
+    this.reset();
+
+    document.getElementById("date").value =
+        new Date().toISOString().split("T")[0];
+
+});
+
+// DISPLAY TRANSACTIONS
+
+function display() {
+
+    let list = document.getElementById("transactionList");
+
+    list.innerHTML = "";
+
+    let category = document.getElementById("filter").value;
+
+    let keyword = document.getElementById("search").value.toLowerCase();
+
+    let filtered = transactions.filter(t => {
+
+        let matchCategory =
+            category === "All" || t.category === category;
+
+        let matchSearch =
+            t.description.toLowerCase().includes(keyword);
+
+        return matchCategory && matchSearch;
+
+    });
+
+    document.getElementById("empty").style.display =
+        filtered.length === 0 ? "block" : "none";
+
+    filtered.forEach(t => {
+
+        let row = document.createElement("tr");
+
+        let values = [
+            t.description,
+            t.category,
+            t.date,
+            t.type,
+            "₹" + t.amount.toFixed(2)
+        ];
+
+        values.forEach((value, index) => {
+
+            let cell = document.createElement("td");
+
+            cell.textContent = value;
+
+            if (index === 4) {
+                cell.className =
+                    t.type === "income" ? "income" : "expense";
+            }
+
+            row.appendChild(cell);
+
+        });
+
+        let action = document.createElement("td");
+
+        let btn = document.createElement("button");
+
+        btn.textContent = "Delete";
+        btn.className = "delete";
+
+        btn.onclick = function() {
+            deleteTransaction(t.id);
+        };
+
+        action.appendChild(btn);
+        row.appendChild(action);
+
+        list.appendChild(row);
+
+    });
+
+}
+
+// DELETE
+
+function deleteTransaction(id) {
+
+    transactions = transactions.filter(t => t.id !== id);
+
+    saveData();
+    display();
+    calculate();
+
+}
+
+// CALCULATE SUMMARY
+
+function calculate() {
+
+    let income = 0;
+    let expense = 0;
+
+    transactions.forEach(t => {
+
+        if (t.type === "income") {
+            income += t.amount;
+        } else {
+            expense += t.amount;
+        }
+
+    });
+
+    document.getElementById("income").textContent =
+        "₹" + income.toFixed(2);
+
+    document.getElementById("expense").textContent =
+        "₹" + expense.toFixed(2);
+
+    document.getElementById("balance").textContent =
+        "₹" + (income - expense).toFixed(2);
+
+}
+
+// SEARCH AND FILTER
+
+document.getElementById("search")
+.addEventListener("input", display);
+
+document.getElementById("filter")
+.addEventListener("change", display);
+
+// RESTORE SESSION
+
+window.onload = function() {
+
+    let savedUser = localStorage.getItem("activeUser");
+
+    if (savedUser && getUsers()[savedUser]) {
+
+        currentUser = savedUser;
+
+        document.getElementById("loginPage").style.display = "none";
+        document.getElementById("app").style.display = "block";
+
+        document.getElementById("username").textContent = savedUser;
+
+        document.getElementById("avatar").textContent =
+            savedUser.charAt(0).toUpperCase();
+
+        document.getElementById("welcomeText").textContent =
+            "Welcome back, " + savedUser + "!";
+
+        showDashboard();
+
+    }
+
+};
+
+</script>
+
+</body>
+</html>
